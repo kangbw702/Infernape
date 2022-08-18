@@ -4,13 +4,51 @@
 \alias{peak_calling}
 \title{Detect peaks from sorted bam files}
 \usage{
-peak_calling(genome.ref)
+peak_calling(
+  genome.ref,
+  bam,
+  batch.start = 1,
+  batch.end = 10,
+  ncores = 1,
+  d = 31,
+  h = 5,
+  d.cut = 50,
+  hr = 160,
+  min.mode.prop = 0.05,
+  min.mode.cutoff = 10,
+  output.path,
+  suffix
+)
 }
 \arguments{
-\item{genome.ref}{genome reference gtf file.}
+\item{genome.ref}{Genome reference gtf file.}
+
+\item{bam}{Sorted bam file.}
+
+\item{batch.start}{ID of the first gene in this batch.}
+
+\item{batch.end}{ID of the last gene in this batch.}
+
+\item{ncores}{The number of cores.}
+
+\item{d}{A parameter for smoothing.}
+
+\item{h}{A parameter for smoothing.}
+
+\item{d.cut}{A parameter for merging close peaks.}
+
+\item{hr}{The estimated half range of peak mode - PAS interval. Used for annotating peak modes.}
+
+\item{min.mode.prop}{Minimal relative threshold (wrt highest peak in 3'UTR region) to filter out small peaks.}
+
+\item{min.mode.cutoff}{Minimal absolute coverage threshold to filter out small peaks.}
+
+\item{output.path}{Output directory.}
+
+\item{suffix}{Suffix as unique label for output table.}
 }
 \value{
-message showing the total number of genes in genome reference.
+A peak table saved as [output.path]/peaks.[suffix].txt.
 }
 \description{
 Detect peaks from sorted bam files
