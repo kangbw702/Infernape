@@ -6,7 +6,8 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of Infernape is to …
+The goal of Infernape is to identify and quantify APA events from
+scRNA-seq data.
 
 ## Installation
 
