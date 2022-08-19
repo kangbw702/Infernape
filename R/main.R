@@ -35,12 +35,17 @@ Infernape <- function(genome.ref,
                       suffix
 ) {
 
+  # Peak calling
   peak.sites = peak_calling(genome.ref, bam, batch.start, batch.end, ncores, d, h, d.cut, hr, min.mode.prop, min.mode.cutoff)
 
   message("\n\nNumber of raw peaks identified: ", nrow(peak.sites))
   utils::write.csv(peak.sites, paste0(output.path, '/peaks_', suffix, '.txt'))
   message("\n\nPeak table is output? ", file.exists(paste0(output.path, '/peaks_', suffix, '.txt')))
   print(utils::head(peak.sites))
+
+  # Peak annotation
+
+
   return (1)
 
 }
