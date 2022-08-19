@@ -22,8 +22,30 @@ peak_annotation(
 
 \item{pas.reference.file}{Known PAS table}
 
-\item{invert_strand}{}
+\item{output.file}{Output directory}
+
+\item{genome}{Full genome sequence}
+
+\item{pas.search.cut.1}{Distance (nt) from the peak mode to upstream boundary of the searching interval for PAS}
+
+\item{pas.search.cut.2}{Distance (nt) from the peak mode to downstream boundary of the searching interval for PAS}
+
+\item{polystretch_length}{Length of consecutive A sequence}
+
+\item{max_mismatch}{Maximal tolerance of mismatch}
+
+\item{motif.search.cut}{Window width for searching specified motifs}
+
+\item{invert_strand}{default FALSE}
+}
+\value{
+A peak annotation table.
 }
 \description{
 Annotate peaks' associated PAS and motifs
+}
+\examples{
+ls()
+
+
 }
