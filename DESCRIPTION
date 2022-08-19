@@ -22,6 +22,7 @@ Imports:
     S4Vectors,
     stats,
     tictoc,
+    tidyr,
     utils
 URL: https://github.com/kangbw702/Infernape
 BugReports: https://github.com/kangbw702/Infernape/issues
