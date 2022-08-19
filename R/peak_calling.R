@@ -14,7 +14,7 @@
 #' @param output.path Output directory.
 #' @param suffix Suffix as unique label for output table.
 #'
-#' @return A peak table saved as \[output.path\]/peaks.\[suffix\].txt.
+#' @return A peak table.
 #' @export
 #'
 #' @examples
@@ -270,9 +270,7 @@ peak_calling = function(genome.ref,
   n.updated.sites = nrow(peak.sites)
   message("There are ", n.updated.sites, " sites after filtering.")
 
-  # write result table
-  utils::write.csv(peak.sites, paste0(output.path, '/peaks_', suffix, '.txt'))
-  return (1)
+  return(peak.sites)
   tictoc::toc()
 
 }
