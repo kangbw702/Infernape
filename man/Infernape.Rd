@@ -17,7 +17,15 @@ Infernape(
   min.mode.prop = 0.05,
   min.mode.cutoff = 10,
   output.path,
-  suffix
+  suffix,
+  pas.reference.file,
+  genome,
+  pas.search.cut.1 = 0,
+  pas.search.cut.2 = 300,
+  polystretch_length = 13,
+  max_mismatch = 1,
+  motif.search.cut = 300,
+  invert_strand = FALSE
 )
 }
 \arguments{
@@ -46,9 +54,26 @@ Infernape(
 \item{output.path}{Output directory.}
 
 \item{suffix}{Suffix as unique label for output table.}
+
+\item{pas.reference.file}{Known PAS table}
+
+\item{genome}{Full genome sequence. Required to be a S4 object.}
+
+\item{pas.search.cut.1}{Distance (nt) from the peak mode to upstream boundary of the searching interval for PAS}
+
+\item{pas.search.cut.2}{Distance (nt) from the peak mode to downstream boundary of the searching interval for PAS}
+
+\item{polystretch_length}{Length of consecutive A sequence}
+
+\item{max_mismatch}{Maximal tolerance of mismatch}
+
+\item{motif.search.cut}{Window width for searching specified motifs}
+
+\item{invert_strand}{default FALSE}
 }
 \value{
 A peak table saved as [output.path]/peaks.[suffix].txt.
+A peak annotation table saved as [output.path]/anno.[suffix].txt.
 }
 \description{
 Detect peaks from sorted bam files

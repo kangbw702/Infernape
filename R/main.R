@@ -13,8 +13,19 @@
 #' @param min.mode.cutoff Minimal absolute coverage threshold to filter out small peaks.
 #' @param output.path Output directory.
 #' @param suffix Suffix as unique label for output table.
+#' @param pas.reference.file Known PAS table.
+#' @param pas.reference.file Known PAS table
+#' @param genome Full genome sequence. Required to be a S4 object.
+#' @param pas.search.cut.1 Distance (nt) from the peak mode to upstream boundary of the searching interval for PAS
+#' @param pas.search.cut.2 Distance (nt) from the peak mode to downstream boundary of the searching interval for PAS
+#' @param polystretch_length Length of consecutive A sequence
+#' @param max_mismatch Maximal tolerance of mismatch
+#' @param motif.search.cut Window width for searching specified motifs
+#' @param invert_strand default FALSE
 #'
 #' @return A peak table saved as \[output.path\]/peaks.\[suffix\].txt.
+#' A peak annotation table saved as \[output.path\]/anno.\[suffix\].txt.
+#'
 #' @export
 #'
 #' @examples
@@ -32,7 +43,15 @@ Infernape <- function(genome.ref,
                       min.mode.prop = 0.05,
                       min.mode.cutoff = 10,
                       output.path,
-                      suffix
+                      suffix,
+                      pas.reference.file,
+                      genome,
+                      pas.search.cut.1 = 0,
+                      pas.search.cut.2 = 300,
+                      polystretch_length = 13,
+                      max_mismatch = 1,
+                      motif.search.cut = 300,
+                      invert_strand = FALSE
 ) {
 
   # Peak calling
@@ -44,7 +63,12 @@ Infernape <- function(genome.ref,
   print(utils::head(peak.sites))
 
   # Peak annotation
+  peak.sites.file = paste0(output.path, '/peaks_', suffix, '.txt')
+  anno = peak_annotation(peak.sites.file, pas.reference.file, genome, pas.search.cut.1, pas.search.cut.2, polystretch_length, max_mismatch, motif.search.cut, invert_strand)
 
+  message("\n\nPeak annotation completes.")
+  utils::write.csv(anno, paste0(output.path, '/anno_', suffix, '.txt'))
+  print(utils::head(anno))
 
   return (1)
 

@@ -5,10 +5,9 @@
 \title{Annotate peaks' associated PAS and motifs}
 \usage{
 peak_annotation(
-  peak.sites.file = peak.sites.file,
-  pas.reference.file = pas.reference.file,
-  output.file,
-  genome = genome,
+  peak.sites.file,
+  pas.reference.file,
+  genome,
   pas.search.cut.1 = 0,
   pas.search.cut.2 = 300,
   polystretch_length = 13,
@@ -22,9 +21,7 @@ peak_annotation(
 
 \item{pas.reference.file}{Known PAS table}
 
-\item{output.file}{Output directory}
-
-\item{genome}{Full genome sequence}
+\item{genome}{Full genome sequence. Required to be a S4 object.}
 
 \item{pas.search.cut.1}{Distance (nt) from the peak mode to upstream boundary of the searching interval for PAS}
 
