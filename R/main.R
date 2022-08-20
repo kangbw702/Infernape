@@ -77,6 +77,7 @@ Infernape <- function(genome.ref,
   anno.raw.file = paste0(output.path, '/anno_', suffix, '.txt')
   anno.filter = peak_filtering(anno.raw.file, q)
   utils::write.csv(anno.filter, paste0(output.path, '/anno_filtered_', suffix, '.csv'))
+  print(utils::head(anno.filter))
 
 
   return ('DONE!')
