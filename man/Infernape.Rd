@@ -25,7 +25,8 @@ Infernape(
   polystretch_length = 13,
   max_mismatch = 1,
   motif.search.cut = 300,
-  invert_strand = FALSE
+  invert_strand = FALSE,
+  q = c(110, 200)
 )
 }
 \arguments{
@@ -70,6 +71,8 @@ Infernape(
 \item{motif.search.cut}{Window width for searching specified motifs}
 
 \item{invert_strand}{default FALSE}
+
+\item{q}{Vector of length 2 which defines the PAS searching window.}
 }
 \value{
 A peak table saved as [output.path]/peaks.[suffix].txt.
@@ -77,4 +80,9 @@ A peak annotation table saved as [output.path]/anno.[suffix].txt.
 }
 \description{
 Detect peaks from sorted bam files
+}
+\examples{
+ls()
+
+
 }

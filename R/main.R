@@ -22,6 +22,7 @@
 #' @param max_mismatch Maximal tolerance of mismatch
 #' @param motif.search.cut Window width for searching specified motifs
 #' @param invert_strand default FALSE
+#' @param q Vector of length 2 which defines the PAS searching window.
 #'
 #' @return A peak table saved as \[output.path\]/peaks.\[suffix\].txt.
 #' A peak annotation table saved as \[output.path\]/anno.\[suffix\].txt.
@@ -29,6 +30,7 @@
 #' @export
 #'
 #' @examples
+#' ls()
 #'
 #'
 Infernape <- function(genome.ref,
@@ -51,7 +53,8 @@ Infernape <- function(genome.ref,
                       polystretch_length = 13,
                       max_mismatch = 1,
                       motif.search.cut = 300,
-                      invert_strand = FALSE
+                      invert_strand = FALSE,
+                      q = c(110, 200)
 ) {
 
   # Peak calling
@@ -70,7 +73,13 @@ Infernape <- function(genome.ref,
   utils::write.csv(anno, paste0(output.path, '/anno_', suffix, '.txt'))
   print(utils::head(anno))
 
-  return (1)
+  # Peak filtering
+  anno.raw.file = paste0(output.path, '/anno_', suffix, '.txt')
+  anno.filter = peak_filtering(anno.raw.file, q)
+  utils::write.csv(anno.filter, paste0(output.path, '/anno_filtered_', suffix, '.csv'))
+
+
+  return ('DONE!')
 
 }
 

@@ -53,3 +53,8 @@ A peak table.
 \description{
 Detect peaks from sorted bam files
 }
+\examples{
+ls()
+
+
+}

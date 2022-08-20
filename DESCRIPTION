@@ -19,6 +19,7 @@ Imports:
     GenomeInfoDb,
     GenomicAlignments,
     GenomicRanges,
+    ggplot2,
     IRanges,
     magrittr,
     parallel,

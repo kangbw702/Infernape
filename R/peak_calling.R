@@ -18,6 +18,7 @@
 #' @export
 #'
 #' @examples
+#' ls()
 #'
 #'
 peak_calling = function(genome.ref,
