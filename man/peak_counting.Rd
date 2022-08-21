@@ -5,12 +5,10 @@
 \title{Count reads for each peak site}
 \usage{
 peak_counting(
-  bamfile = bamfile[i],
-  whitelist.file = whitelist.file[i],
-  peak.sites.file = peak.sites.file,
+  bamfile,
+  whitelist.file,
+  peak.sites.file,
   ncores = ncores,
-  CBtag = "CB",
-  UMItag = "UB",
   start.cid = 1,
   end.cid = 26316
 )
@@ -24,16 +22,12 @@ peak_counting(
 
 \item{ncores}{Number of cores.}
 
-\item{CBtag}{Cell barcode tag in BAM file.}
-
-\item{UMItag}{UMI barcode tag in BAM file.}
-
 \item{start.cid}{The first peak cluster ID to analyze.}
 
 \item{end.cid}{The last peak cluster ID to analyze.}
 }
 \value{
-A peak site by cell UMI count matrix.
+A peak site by cell UMI count matrix (sparse).
 }
 \description{
 Count reads for each peak site

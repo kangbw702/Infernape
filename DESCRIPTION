@@ -22,6 +22,7 @@ Imports:
     ggplot2,
     IRanges,
     magrittr,
+    Matrix,
     parallel,
     plyr,
     Rsamtools,

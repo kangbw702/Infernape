@@ -79,6 +79,15 @@ Infernape <- function(genome.ref,
   utils::write.csv(anno.filter, paste0(output.path, '/anno_filtered_', suffix, '.csv'))
   print(utils::head(anno.filter))
 
+  # peak counting
+
+  #peak_counting()
+
+  #Matrix::writeMM(mat.to.write, file = paste0(output.dir, "/matrix.mtx"))
+  #utils::write.table(whitelist.bc, file = paste0(output.dir, "/barcodes.tsv"), quote = FALSE, row.names = FALSE, col.names = FALSE)
+  #utils::write.table(rownames(mat.to.write), file = paste0(output.dir, "/sitenames.tsv"), quote = FALSE, row.names = FALSE, col.names = FALSE)
+
+
 
   return ('DONE!')
 
