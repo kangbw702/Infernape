@@ -23,9 +23,14 @@
 #' @param motif.search.cut Window width for searching specified motifs
 #' @param invert_strand default FALSE
 #' @param q Vector of length 2 which defines the PAS searching window.
+#' @param whitelist.file Whitelist of cell barcodes.
+#' @param start.cid The first peak cluster ID to analyze.
+#' @param end.cid The last peak cluster ID to analyze.
 #'
-#' @return A peak table saved as \[output.path\]/peaks.\[suffix\].txt.
-#' A peak annotation table saved as \[output.path\]/anno.\[suffix\].txt.
+#' @return A peak table saved as \[output.path\]/peaks_\[suffix\].txt.
+#' A peak annotation table saved as \[output.path\]/anno_\[suffix\].txt.
+#' A peak annotation table after fltering by PAS and motifs saved as \[output.path\]/anno_filtered_\[suffix\].txt.
+#' A peak by cell UMI count sparse matrix.
 #'
 #' @export
 #'
@@ -54,7 +59,10 @@ Infernape <- function(genome.ref,
                       max_mismatch = 1,
                       motif.search.cut = 300,
                       invert_strand = FALSE,
-                      q = c(110, 200)
+                      q = c(110, 200),
+                      whitelist.file,
+                      start.cid = NULL,
+                      end.cid = NULL
 ) {
 
   # Peak calling
@@ -80,12 +88,14 @@ Infernape <- function(genome.ref,
   print(utils::head(anno.filter))
 
   # peak counting
+  peak.sites.file = paste0(output.path, '/anno_filtered_', suffix, '.csv')
+  mat = peak_counting(bamfile = bam, whitelist.file, peak.sites.file, ncores = ncores, start.cid = NULL, end.cid = NULL)
 
-  #peak_counting()
-
-  #Matrix::writeMM(mat.to.write, file = paste0(output.dir, "/matrix.mtx"))
-  #utils::write.table(whitelist.bc, file = paste0(output.dir, "/barcodes.tsv"), quote = FALSE, row.names = FALSE, col.names = FALSE)
-  #utils::write.table(rownames(mat.to.write), file = paste0(output.dir, "/sitenames.tsv"), quote = FALSE, row.names = FALSE, col.names = FALSE)
+  cnt.out.path = paste0(output.path, '/cnt_mat')
+  if (!dir.exists(cnt.out.path)) dir.create(cnt.out.path)
+  Matrix::writeMM(mat, file = paste0(cnt.out.path, "/matrix.mtx"))
+  utils::write.table(colnames(mat), file = paste0(cnt.out.path, "/barcodes.tsv"),  quote = FALSE, row.names = FALSE, col.names = FALSE)
+  utils::write.table(rownames(mat), file = paste0(cnt.out.path, "/sitenames.tsv"), quote = FALSE, row.names = FALSE, col.names = FALSE)
 
 
 

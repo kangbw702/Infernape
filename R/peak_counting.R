@@ -19,8 +19,8 @@ peak_counting <- function(bamfile,
                           whitelist.file ,
                           peak.sites.file,
                           ncores = ncores,
-                          start.cid = 1,
-                          end.cid = 26316
+                          start.cid = NULL,
+                          end.cid = NULL
                           ) {
 
   lock <- tempfile()

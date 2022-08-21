@@ -26,7 +26,10 @@ Infernape(
   max_mismatch = 1,
   motif.search.cut = 300,
   invert_strand = FALSE,
-  q = c(110, 200)
+  q = c(110, 200),
+  whitelist.file,
+  start.cid = NULL,
+  end.cid = NULL
 )
 }
 \arguments{
@@ -73,10 +76,18 @@ Infernape(
 \item{invert_strand}{default FALSE}
 
 \item{q}{Vector of length 2 which defines the PAS searching window.}
+
+\item{whitelist.file}{Whitelist of cell barcodes.}
+
+\item{start.cid}{The first peak cluster ID to analyze.}
+
+\item{end.cid}{The last peak cluster ID to analyze.}
 }
 \value{
-A peak table saved as [output.path]/peaks.[suffix].txt.
-A peak annotation table saved as [output.path]/anno.[suffix].txt.
+A peak table saved as [output.path]/peaks_[suffix].txt.
+A peak annotation table saved as [output.path]/anno_[suffix].txt.
+A peak annotation table after fltering by PAS and motifs saved as [output.path]/anno_filtered_[suffix].txt.
+A peak by cell UMI count sparse matrix.
 }
 \description{
 Detect peaks from sorted bam files
