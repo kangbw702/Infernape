@@ -23,6 +23,7 @@ Imports:
     IRanges,
     magrittr,
     Matrix,
+    MGLM,
     parallel,
     plyr,
     Rsamtools,

@@ -11,9 +11,12 @@ apa_test(
   utr3.file,
   ctype.colname,
   base_grp,
-  alt_grp,
+  alt_grp = NULL,
   cut.low.pct = 0.05,
-  test.type
+  cut.pval = 0.05,
+  cut.MPRO = 0.2,
+  test.type,
+  out.dir
 )
 }
 \arguments{
@@ -29,11 +32,17 @@ apa_test(
 
 \item{base_grp}{Base cell group name.}
 
-\item{alt_grp}{Alternative cell group name. If 'Other', take all cell groups except base as alternative.}
+\item{alt_grp}{Alternative cell group name. If 'NULL', take all cell groups except base as alternative.}
 
-\item{cut.low.pct}{Threshold for low expressing percentage.}
+\item{cut.low.pct}{Threshold for low expressing percentage. Default to be 0.05.}
+
+\item{cut.pval}{Threshold for p-value. Default to be 0.05.}
+
+\item{cut.MPRO}{Threshold for effect size (MPRO) filtering. Default to be 0.2.}
 
 \item{test.type}{Type of testing. Value can be 'gene', 'utr', 'btw'.}
+
+\item{out.dir}{Directory to save test results.}
 }
 \value{
 Differential APA testing result table.
