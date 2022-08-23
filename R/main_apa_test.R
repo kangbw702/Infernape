@@ -9,9 +9,12 @@
 #' @param utr3.file Directory for the 3'UTR annotation table (mapping each 3'UTR region to a unique transcript ID).
 #' @param ctype.colname Column name that defines cell groups in the cell attributes table.
 #' @param base_grp Base cell group name.
-#' @param alt_grp Alternative cell group name. If 'Other', take all cell groups except base as alternative.
-#' @param cut.low.pct Threshold for low expressing percentage.
+#' @param alt_grp Alternative cell group name. If 'NULL', take all cell groups except base as alternative.
+#' @param cut.low.pct Threshold for low expressing percentage. Default to be 0.05.
+#' @param cut.pval Threshold for p-value. Default to be 0.05.
+#' @param cut.MPRO Threshold for effect size (MPRO) filtering. Default to be 0.2.
 #' @param test.type Type of testing. Value can be 'gene', 'utr', 'btw'.
+#' @param out.dir Directory to save test results.
 #'
 #' @return Differential APA testing result table.
 #' @export
@@ -28,9 +31,12 @@ apa_test <- function(counts.dir,
                      utr3.file,
                      ctype.colname,
                      base_grp,
-                     alt_grp,
+                     alt_grp = NULL,
                      cut.low.pct = 0.05,
-                     test.type
+                     cut.pval = 0.05,
+                     cut.MPRO = 0.2,
+                     test.type,
+                     out.dir
                      )
   {
 
@@ -67,6 +73,24 @@ apa_test <- function(counts.dir,
   cnt = cnt[, shared.cb]
 
   message('Cell barcodes in attr table are consistent with count matrix? ', all(colnames(cnt) == rownames(attr.tbl)))
+
+  if (!test.type %in% c('gene', 'utr', 'btw')) {warning("Wrong test type is given!"); stop}
+
+  if (test.type == 'gene') {
+
+    genes.multi.pk = unique(anno.tbl[anno.tbl$nn.pk > 1, 'gene'])
+    message("The number of multi-peak genes to test: ", length(genes.multi.pk))
+    res = gene_test_wrap(genes.multi.pk, cnt, anno.tbl, attr.tbl, ctype.colname, base_grp, alt_grp, cut.low.pct, cut.pval, cut.MPRO)
+    if ( is.null(alt_grp)) utils::write.csv(res, paste0(out.dir, '/', test.type, '.', base_grp, '.vs.others.csv'))
+    if (!is.null(alt_grp)) utils::write.csv(res, paste0(out.dir, '/', test.type, '.', base_grp, '.vs.', alt_grp, '.csv'))
+
+  }
+
+  #if (test.type == 'utr')
+
+  #if (test.type == 'btw')
+
+
 
 
 
