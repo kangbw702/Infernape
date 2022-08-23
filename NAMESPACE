@@ -2,6 +2,7 @@
 
 export("%>%")
 export(Infernape)
+export(apa_test)
 export(peak_annotation)
 export(peak_calling)
 export(peak_counting)
