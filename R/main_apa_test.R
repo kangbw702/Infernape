@@ -95,6 +95,7 @@ apa_test <- function(counts.dir,
 
     utr.multi.pk = unique(anno.tbl[anno.tbl$nn.pk.per.trans > 1, 'gene.trans.ID'])
     message("The number of multi-peak utrs to test: ", length(utr.multi.pk))
+
     if (length(utr.multi.pk) >= 1) {
       res = utr_test_wrap(utr.multi.pk, cnt, anno.tbl, attr.tbl, ctype.colname, base_grp, alt_grp, cut.low.pct, cut.pval, cut.MPRO)
     } else {
@@ -103,6 +104,7 @@ apa_test <- function(counts.dir,
     }
 
   }
+
 
   if (test.type == 'btw') {
 
