@@ -141,7 +141,7 @@ assign.trans.ID <- function(pid, utr3.file, anno.tbl) {
     tmp = utr3.anno[utr3.anno$gene_symbol == anno.tbl[pid, 'gene'], ]
     tmp = tmp[order(tmp$start), ]
 
-    if (anno.tbl[id, 'strand'] == '-') {
+    if (anno.tbl[pid, 'strand'] == '-') {
       id = max(which(anno.tbl[pid, 'mode.pos'] - tmp$end > 0))
     } else {
       id = min(which(tmp$start - anno.tbl[pid, 'mode.pos'] > 0))
