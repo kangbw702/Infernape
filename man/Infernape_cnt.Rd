@@ -17,7 +17,6 @@ Infernape_cnt(
   min.mode.prop = 0.05,
   min.mode.cutoff = 10,
   output.path,
-  suffix,
   pas.reference.file,
   genome,
   pas.search.cut.1 = 0,
@@ -57,8 +56,6 @@ Infernape_cnt(
 
 \item{output.path}{Output directory.}
 
-\item{suffix}{Suffix as unique label for output table.}
-
 \item{pas.reference.file}{Known PAS table}
 
 \item{genome}{Full genome sequence. Required to be a S4 object.}
@@ -84,9 +81,9 @@ Infernape_cnt(
 \item{end.cid}{The last peak cluster ID to analyze.}
 }
 \value{
-A peak table saved as [output.path]/peaks_[suffix].txt.
-A peak annotation table saved as [output.path]/anno_[suffix].txt.
-A peak annotation table after fltering by PAS and motifs saved as [output.path]/anno_filtered_[suffix].txt.
+A peak table saved as [output.path]/peaks.txt.
+A peak annotation table saved as [output.path]/anno.txt.
+A peak annotation table after fltering by PAS and motifs saved as [output.path]/anno_filtered.txt.
 A peak by cell UMI count sparse matrix.
 }
 \description{

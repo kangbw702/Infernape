@@ -12,7 +12,6 @@
 #' @param min.mode.prop Minimal relative threshold (wrt highest peak in 3'UTR region) to filter out small peaks.
 #' @param min.mode.cutoff Minimal absolute coverage threshold to filter out small peaks.
 #' @param output.path Output directory.
-#' @param suffix Suffix as unique label for output table.
 #' @param pas.reference.file Known PAS table.
 #' @param pas.reference.file Known PAS table
 #' @param genome Full genome sequence. Required to be a S4 object.
@@ -27,9 +26,9 @@
 #' @param start.cid The first peak cluster ID to analyze.
 #' @param end.cid The last peak cluster ID to analyze.
 #'
-#' @return A peak table saved as \[output.path\]/peaks_\[suffix\].txt.
-#' A peak annotation table saved as \[output.path\]/anno_\[suffix\].txt.
-#' A peak annotation table after fltering by PAS and motifs saved as \[output.path\]/anno_filtered_\[suffix\].txt.
+#' @return A peak table saved as \[output.path\]/peaks.txt.
+#' A peak annotation table saved as \[output.path\]/anno.txt.
+#' A peak annotation table after fltering by PAS and motifs saved as \[output.path\]/anno_filtered.txt.
 #' A peak by cell UMI count sparse matrix.
 #'
 #' @export
@@ -50,7 +49,6 @@ Infernape_cnt <- function(genome.ref,
                       min.mode.prop = 0.05,
                       min.mode.cutoff = 10,
                       output.path,
-                      suffix,
                       pas.reference.file,
                       genome,
                       pas.search.cut.1 = 0,
@@ -69,26 +67,26 @@ Infernape_cnt <- function(genome.ref,
   peak.sites = peak_calling(genome.ref, bam, batch.start, batch.end, ncores, d, h, d.cut, hr, min.mode.prop, min.mode.cutoff)
 
   message("\n\nNumber of raw peaks identified: ", nrow(peak.sites))
-  utils::write.csv(peak.sites, paste0(output.path, '/peaks_', suffix, '.txt'))
-  message("\n\nPeak table is output? ", file.exists(paste0(output.path, '/peaks_', suffix, '.txt')))
+  utils::write.csv(peak.sites, paste0(output.path, '/peaks.txt'))
+  message("\n\nPeak table is output? ", file.exists(paste0(output.path, '/peaks.txt')))
   print(utils::head(peak.sites))
 
   # Peak annotation
-  peak.sites.file = paste0(output.path, '/peaks_', suffix, '.txt')
+  peak.sites.file = paste0(output.path, '/peaks.txt')
   anno = peak_annotation(peak.sites.file, pas.reference.file, genome, pas.search.cut.1, pas.search.cut.2, polystretch_length, max_mismatch, motif.search.cut, invert_strand)
 
   message("\n\nPeak annotation completes.")
-  utils::write.csv(anno, paste0(output.path, '/anno_', suffix, '.txt'))
+  utils::write.csv(anno, paste0(output.path, '/anno.txt'))
   print(utils::head(anno))
 
   # Peak filtering
-  anno.raw.file = paste0(output.path, '/anno_', suffix, '.txt')
+  anno.raw.file = paste0(output.path, '/anno.txt')
   anno.filter = peak_filtering(anno.raw.file, q)
-  utils::write.csv(anno.filter, paste0(output.path, '/anno_filtered_', suffix, '.csv'))
+  utils::write.csv(anno.filter, paste0(output.path, '/anno_filtered.csv'))
   print(utils::head(anno.filter))
 
   # peak counting
-  peak.sites.file = paste0(output.path, '/anno_filtered_', suffix, '.csv')
+  peak.sites.file = paste0(output.path, '/anno_filtered.csv')
   mat = peak_counting(bamfile = bam, whitelist.file, peak.sites.file, ncores = ncores, start.cid = NULL, end.cid = NULL)
 
   cnt.out.path = paste0(output.path, '/cnt_mat')
@@ -96,8 +94,6 @@ Infernape_cnt <- function(genome.ref,
   Matrix::writeMM(mat, file = paste0(cnt.out.path, "/matrix.mtx"))
   utils::write.table(colnames(mat), file = paste0(cnt.out.path, "/barcodes.tsv"),  quote = FALSE, row.names = FALSE, col.names = FALSE)
   utils::write.table(rownames(mat), file = paste0(cnt.out.path, "/sitenames.tsv"), quote = FALSE, row.names = FALSE, col.names = FALSE)
-
-
 
   return ('DONE!')
 
