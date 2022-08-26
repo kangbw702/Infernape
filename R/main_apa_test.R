@@ -25,7 +25,7 @@
 #'
 #'
 #'
-apa_test <- function(counts.dir,
+Infernape_apa <- function(counts.dir,
                      attr.file,
                      anno.file,
                      utr3.file,

@@ -38,7 +38,7 @@
 #' ls()
 #'
 #'
-Infernape <- function(genome.ref,
+Infernape_cnt <- function(genome.ref,
                       bam,
                       batch.start = 1,
                       batch.end = 10,
