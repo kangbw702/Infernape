@@ -351,7 +351,7 @@ utr_test_wrap = function(utr.multi.pk, cnt, anno.tbl, attr.tbl, ctype.colname, b
 
 ################################################################################
 
-<<<<<<< HEAD
+
 single_btw_test <- function(gene.to.test, cnt, anno.tbl, attr.tbl, ctype.colname, base_grp, alt_grp, cut.low.pct) {
 
   # find associated peaks
@@ -531,9 +531,6 @@ btw_test_wrap = function(genes.multi.utr, cnt, anno.tbl, attr.tbl, ctype.colname
   return(res.tbl)
 
 }
-=======
-
->>>>>>> aca7cfcc6d1b7fd6a854e5135d5f3d53ba8a1777
 
 
 ################################################################################
