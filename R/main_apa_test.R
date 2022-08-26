@@ -74,27 +74,57 @@ apa_test <- function(counts.dir,
 
   message('Cell barcodes in attr table are consistent with count matrix? ', all(colnames(cnt) == rownames(attr.tbl)))
 
-  if (!test.type %in% c('gene', 'utr', 'btw')) {warning("Wrong test type is given!"); stop}
+  out = TRUE
+
+  if (!test.type %in% c('gene', 'utr', 'btw')) { warning("Wrong test type is given!"); out =F; stop }
 
   if (test.type == 'gene') {
 
     genes.multi.pk = unique(anno.tbl[anno.tbl$nn.pk > 1, 'gene'])
     message("The number of multi-peak genes to test: ", length(genes.multi.pk))
-    res = gene_test_wrap(genes.multi.pk, cnt, anno.tbl, attr.tbl, ctype.colname, base_grp, alt_grp, cut.low.pct, cut.pval, cut.MPRO)
-    if ( is.null(alt_grp)) utils::write.csv(res, paste0(out.dir, '/', test.type, '.', base_grp, '.vs.others.csv'))
-    if (!is.null(alt_grp)) utils::write.csv(res, paste0(out.dir, '/', test.type, '.', base_grp, '.vs.', alt_grp, '.csv'))
+    if (length(genes.multi.pk) >= 1) {
+      res = gene_test_wrap(genes.multi.pk, cnt, anno.tbl, attr.tbl, ctype.colname, base_grp, alt_grp, cut.low.pct, cut.pval, cut.MPRO)
+    } else {
+      message('No multi-peak genes found.')
+      out = F
+    }
 
   }
 
-  #if (test.type == 'utr')
+  if (test.type == 'utr') {
 
-  #if (test.type == 'btw')
+    utr.multi.pk = unique(anno.tbl[anno.tbl$nn.pk.per.trans > 1, 'gene.trans.ID'])
+    message("The number of multi-peak utrs to test: ", length(utr.multi.pk))
+    if (length(utr.multi.pk) >= 1) {
+      res = utr_test_wrap(utr.multi.pk, cnt, anno.tbl, attr.tbl, ctype.colname, base_grp, alt_grp, cut.low.pct, cut.pval, cut.MPRO)
+    } else {
+      message('No multi-peak utrs found.')
+      out = F
+    }
 
+  }
 
+  if (test.type == 'btw') {
 
+    genes.multi.utr = unique(anno.tbl[anno.tbl$nn.trans.per.gene > 1, 'gene'])
+    message("The number of multi-utr genes to test: ", length(genes.multi.utr))
+    if (length(genes.multi.utr) >= 1) {
+      res = btw_test_wrap(genes.multi.utr, cnt, anno.tbl, attr.tbl, ctype.colname, base_grp, alt_grp, cut.low.pct, cut.pval, cut.MPRO)
+    } else {
+      message('No multi-utr genes found.')
+      out = F
+    }
 
+  }
+
+  if (out) {
+    if ( is.null(alt_grp)) utils::write.csv(res, paste0(out.dir, '/', test.type, '.', base_grp, '.vs.others.csv'))
+    if (!is.null(alt_grp)) utils::write.csv(res, paste0(out.dir, '/', test.type, '.', base_grp, '.vs.', alt_grp, '.csv'))
+    message('Write out done!')
+  }
 
 }
+
 
 
 assign.trans.ID <- function(pid, utr3.file, anno.tbl) {
