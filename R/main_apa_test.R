@@ -86,7 +86,15 @@ apa_test <- function(counts.dir,
 
   }
 
-  #if (test.type == 'utr')
+  if (test.type == 'utr') {
+
+    utr.multi.pk = unique(anno.tbl[anno.tbl$nn.pk.per.trans > 1, 'gene.trans.ID'])
+    message("The number of multi-peak utrs to test: ", length(utr.multi.pk))
+    res = utr_test_wrap(utr.multi.pk, cnt, anno.tbl, attr.tbl, ctype.colname, base_grp, alt_grp, cut.low.pct, cut.pval, cut.MPRO)
+    if ( is.null(alt_grp)) utils::write.csv(res, paste0(out.dir, '/', test.type, '.', base_grp, '.vs.others.csv'))
+    if (!is.null(alt_grp)) utils::write.csv(res, paste0(out.dir, '/', test.type, '.', base_grp, '.vs.', alt_grp, '.csv'))
+
+  }
 
   #if (test.type == 'btw')
 
