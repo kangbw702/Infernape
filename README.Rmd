@@ -31,12 +31,17 @@ devtools::install_github("kangbw702/Infernape")
 
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
+This is a basic example which shows you how to solve a common problem. The data used for this example can be downloaded from http://www.htslib.org/doc/samtools-merge.html
 
 ```{r example}
 library(Infernape)
 ## basic example code
+## Here is an example
 ```
+
+
+
+
 
 <!-- What is special about using `README.Rmd` instead of just `README.md`? You can include R chunks like so: -->
 
