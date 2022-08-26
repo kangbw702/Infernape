@@ -35,7 +35,7 @@ This is a basic example which shows you how to solve a common problem. The data 
 
 Function `Infernape_cnt` outputs raw peaks, peak annotation (before and after filtering), and peak by cell UMI count matrix. 
 
-```{r echo=FALSE}
+```{r}
 library(Infernape)
 genome = BSgenome.Mmusculus.UCSC.mm10::BSgenome.Mmusculus.UCSC.mm10
 Infernape_cnt(genome.ref = '../data/ref.csv',
@@ -67,7 +67,7 @@ Infernape_cnt(genome.ref = '../data/ref.csv',
 
 Function `Infernape_apa` performs hierarchical differential APA testing.
 
-```{r echo=FALSE}
+```{r}
 Infernape_apa(counts.dir = '../result/cnt_mat',
               attr.file = '../data/attr.tbl.example.csv',
               anno.file = '../result/anno_filtered.csv',
