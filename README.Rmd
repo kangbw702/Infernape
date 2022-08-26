@@ -31,12 +31,56 @@ devtools::install_github("kangbw702/Infernape")
 
 ## Example
 
-This is a basic example which shows you how to solve a common problem. The data used for this example can be downloaded from http://www.htslib.org/doc/samtools-merge.html
+This is a basic example which shows you how to solve a common problem. The data used for this example can be downloaded from https://www.dropbox.com/sh/pp9hoe128lfci7u/AABCtyOjxB8Ejb_ObcBw7k9ya?dl=0.  
+
+Function `Infernape_cnt` outputs raw peaks, peak annotation (before and after filtering), and peak by cell UMI count matrix. 
 
 ```{r example}
 library(Infernape)
-## basic example code
-## Here is an example
+genome = BSgenome.Mmusculus.UCSC.mm10::BSgenome.Mmusculus.UCSC.mm10
+Infernape_cnt(genome.ref = '../data/ref.csv',
+              bam = '../data/TEGLU16.bam',
+              batch.start = 2901,
+              batch.end = 2920,
+              ncores = 1,
+              d = 31,
+              h = 5,
+              d.cut = 50,
+              hr = 160,
+              min.mode.prop = 0.05,
+              min.mode.cutoff = 5,
+              output.path = '../result',
+              pas.reference.file = '../data/PAS_withinfo.csv',
+              genome = genome,
+              pas.search.cut.1 = 0,
+              pas.search.cut.2 = 300,
+              polystretch_length = 13,
+              max_mismatch = 1,
+              motif.search.cut = 300,
+              invert_strand = FALSE,
+              q = c(110, 200),
+              whitelist.file = "../data/whitelist.TEGLU16.csv",
+              start.cid = NULL,
+              end.cid = NULL
+)
+```
+
+Function `Infernape_apa` performs hierarchical differential APA testing.
+
+```{r}
+Infernape_apa(counts.dir = '../result/cnt_mat',
+              attr.file = '../data/attr.tbl.example.csv',
+              anno.file = '../result/anno_filtered.csv',
+              utr3.file = '../data/ref.utr3.anno.csv',
+              ctype.colname = 'ctype',
+              base_grp = 'c1',
+              alt_grp = 'c2',
+              cut.low.pct = 0.05,
+              cut.pval = 0.05,
+              cut.MPRO = 0.2,
+              test.type = 'gene',
+              out.dir = '../result'
+)
 ```
 
 
