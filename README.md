@@ -77,7 +77,7 @@ Infernape_apa(counts.dir = '../result/cnt_mat',
 
 ## References
 
-3'UTR and PAS references for Human, Rat, and Caenorhabditis_elegans can be found [here] (https://www.dropbox.com/sh/3e5kwslflzdevfu/AAD5nyd-Bcf9GOSFw8I7YwhGa?dl=0).
+3'UTR and PAS references for Human, Rat, and Caenorhabditis_elegans can be found [here](https://www.dropbox.com/sh/3e5kwslflzdevfu/AAD5nyd-Bcf9GOSFw8I7YwhGa?dl=0).
 
 
 
