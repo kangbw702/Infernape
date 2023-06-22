@@ -22,8 +22,7 @@ devtools::install_github("kangbw702/Infernape")
 ## Example
 
 This is a basic example which shows you how to solve a common problem.
-The data used for this example can be downloaded from
-<https://www.dropbox.com/sh/pp9hoe128lfci7u/AABCtyOjxB8Ejb_ObcBw7k9ya?dl=0>.
+The data used for this example can be downloaded from [here](https://www.dropbox.com/sh/pp9hoe128lfci7u/AABCtyOjxB8Ejb_ObcBw7k9ya?dl=0).
 
 Function `Infernape_cnt` outputs raw peaks, peak annotation (before and
 after filtering), and peak by cell UMI count matrix.
@@ -75,6 +74,12 @@ Infernape_apa(counts.dir = '../result/cnt_mat',
               out.dir = '../result'
 )
 ```
+
+## References
+
+3'UTR and PAS references for Human, Rat, and Caenorhabditis_elegans can be found [here] (https://www.dropbox.com/sh/3e5kwslflzdevfu/AAD5nyd-Bcf9GOSFw8I7YwhGa?dl=0).
+
+
 
 <!-- What is special about using `README.Rmd` instead of just `README.md`? You can include R chunks like so: -->
 <!-- ```{r cars} -->
