@@ -18,6 +18,30 @@ You can install the development version of Infernape from
 # install.packages("devtools")
 devtools::install_github("kangbw702/Infernape")
 ```
+Please install Infernape under R/4.0.0. Recommended versions of dependencies are as follows:
+
+``` r
+BiocGenerics_0.34.0
+Biostrings_2.56.0
+BSgenome_1.56.0
+BSgenome.Mmusculus.UCSC.mm10_1.4.0
+doParallel_1.0.15
+foreach_1.5.0
+dplyr_0.8.5
+tidyr_1.1.0 
+GenomicAlignments_1.24.0
+GenomicRanges_1.40.0
+GenomeInfoDb_1.24.0
+ggplot2_3.3.1
+IRanges_2.22.2
+magrittr_1.5
+MGLM_0.2.1
+Matrix_1.4-1
+plyr_1.8.6
+Rsamtools_2.4.0
+S4Vectors_0.26.1
+tictoc_1.2
+```
 
 ## Example
 
