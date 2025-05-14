@@ -9,7 +9,7 @@
 The goal of Infernape is to identify and quantify APA events from
 scRNA-seq data.
 
-Please cite the [paper] (https://genome.cshlp.org/content/33/10/1774.short) "Kang, Bowei, Yalan Yang, Kaining Hu, Xiangbin Ruan, Yi-Lin Liu, Pinky Lee, Jasper Lee, Jingshu Wang, and Xiaochang Zhang. "Infernape uncovers cell type–specific and spatially resolved alternative polyadenylation in the brain." Genome Research 33, no. 10 (2023): 1774-1787."
+Please cite the [paper](https://genome.cshlp.org/content/33/10/1774.short) "Kang, Bowei, Yalan Yang, Kaining Hu, Xiangbin Ruan, Yi-Lin Liu, Pinky Lee, Jasper Lee, Jingshu Wang, and Xiaochang Zhang. "Infernape uncovers cell type–specific and spatially resolved alternative polyadenylation in the brain." Genome Research 33, no. 10 (2023): 1774-1787."
 
 ## Installation
 
